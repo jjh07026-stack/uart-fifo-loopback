@@ -52,6 +52,14 @@ PC ──rx──▶ uart_rx ──▶ FIFO_RX ──▶ FIFO_TX ──▶ uart_
   - 수정안: IDLE에서 `tx_start`를 받는 순간 `tx_busy_next = 1`
 - **검증 공백**: 현재 테스트벤치는 1 byte 송신 → 수신 완료 → 다음 송신 순서라 FIFO에 최대 1 byte만 머뭅니다. full · overflow와 위 버그를 재현하려면 연속 송신 테스트가 필요합니다.
 
+## TODO
+
+- [ ] 5 byte 이상 연속 송신 테스트벤치 추가 (FIFO full · overflow 검증)
+- [ ] 연속 송신으로 `tx_busy` 1클럭 지연에 의한 데이터 유실 재현
+- [ ] `uart_tx` 수정: IDLE에서 `tx_start`를 받는 순간 `tx_busy_next = 1`
+- [ ] 수정 후 기존 테스트(FIFO 단독, 1 byte, 랜덤 16 byte) + 연속 송신 테스트 다시 실행해 PASS 확인
+- [ ] 수정 전후 파형 캡처와 결과를 README에 정리
+
 ## 파일
 
 ```
